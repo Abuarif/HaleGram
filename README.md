@@ -44,10 +44,21 @@ sendMessage
 sendChatAction (is typing...)
 sendPhoto
 sendVideo
-sendAudio
-sendDocument
 editMessageText
 forwardMessage
+sendAudio
+sendVoice
+sendDocument
+sendSticker
+sendLocation
+sendContact
+sendVenue
+getFile
+getChat
+getChatAdministrators
+getChatMembersCount
+getChatMember
+
 ```
 
 and other in updates..! Listen to [@HaleGram](https://telegram.me/HaleGram)
