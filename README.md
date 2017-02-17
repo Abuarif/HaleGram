@@ -3,6 +3,10 @@
 Created by [GynxLol](https://telegram.me/GynxLol), licensed under MIT.
 *HaleGram is the best framework to create a bot for Telegram!*
 
+This framework use another class:
+
+* [Http Request](https://github.com/hay/httprequest/blob/master/class-http-request.php)
+
 ##Usage
 
 ###Installation
