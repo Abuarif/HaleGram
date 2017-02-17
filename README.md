@@ -7,6 +7,8 @@ This framework use another class:
 
 * [Http Request](https://github.com/hay/httprequest/blob/master/class-http-request.php)
 
+<img src='https://raw.githubusercontent.com/GynxLol/HaleGram/master/src/HaleGram.png' alt='HaleGram logo' onmouseover="this.src='https://raw.githubusercontent.com/GynxLol/HaleGram/master/src/HaleGram.png';" onmouseout="this.src='https://raw.githubusercontent.com/GynxLol/HaleGram/master/src/HaleGram.png';" />
+
 ##Usage
 
 ###Installation
