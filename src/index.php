@@ -13,6 +13,7 @@ echo "<br>";
 $anno = date("Y");
 echo '<center><img src="HaleGram.png" alt="Logo di HaleGram" height="150" width="200"></center>';
 echo "<br><center><h1><b>HaleGram</b> | $anno</h1></center>";
+echo "<center>";
 class Bot
 {
     
@@ -55,7 +56,7 @@ class Bot
         }
     }
     
-    public function getUpdates($offset, $limit, $timeout, $allowed)
+    public function getUpdates($offset = false, $limit = false, $timeout = false, $allowed = false)
     {
         if ($offset)
             $data['offset'] = $offset;
@@ -192,6 +193,7 @@ class Bot
             return $rr;
         }
     }
+    
     public function sendPhoto($chatID, $img, $rmf = false, $cap = '', $inline = false)
     {
         
@@ -227,6 +229,43 @@ class Bot
             return $rr;
         }
     }
+    
+    public function sendSticker($chatID, $img, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'sticker' => $img,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendSticker", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendSticker</i></center>";
+            return $rr;
+        }
+    }
+    
     public function sendVideo($chatID, $vid, $rmf = false, $cap = '', $inline = false)
     {
         
@@ -260,6 +299,388 @@ class Bot
         } else {
             echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVideo</i></center>";
             return $rr;
+        }
+    }
+    
+    public function sendAudio($chatID, $vid, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'audio' => $vid,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendAudio", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendAudio</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function sendDocument($chatID, $vid, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'document' => $vid,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendDocument", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendDocument</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function sendVoice($chatID, $vid, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'voice' => $vid,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendVoice", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVoice</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function sendLocation($chatID, $latitude, $longitude, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendLocation", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendLocation</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function sendVenue($chatID, $latitude, $longitude, $title, $address, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'title' => $title,
+            'address' => $address,
+            'caption' => $cap
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendVenue", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVenue</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function sendContact($chatID, $phone, $first, $last = false, $rmf = false, $cap = '', $inline = false)
+    {
+        
+        if ($rmf) {
+            if ($inline) {
+                $rm = array(
+                    'inline_keyboard' => $rmf
+                );
+                $rm = json_encode($rm);
+            } else {
+                $rm = array(
+                    'keyboard' => $rmf,
+                    'resize_keyboard' => true
+                );
+                $rm = json_encode($rm);
+            }
+        }
+        $args = array(
+            'chat_id' => $chatID,
+            'phone_number' => $phone,
+            'first_name' => $first
+        );
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        if ($last)
+            $args['last_name'] = $last;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendContact", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendContact</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function kickChatMember($chatID, $userID)
+    {
+        $args = array(
+            'chat_id' => $chatID,
+            'user_id' => $userID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/kickChatMember", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: kickChatMember</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function unbanChatMember($chatID, $userID)
+    {
+        $args = array(
+            'chat_id' => $chatID,
+            'user_id' => $userID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/unbanChatMember", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: unbanChatMember</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function leaveChat($chatID)
+    {
+        $args = array(
+            'chat_id' => $chatID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/leaveChat", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: leaveChat</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getChat($chatID)
+    {
+        $args = array(
+            'chat_id' => $chatID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/getChat", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChat</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getChatAdministrators($chatID)
+    {
+        $args = array(
+            'chat_id' => $chatID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/getChatAdministrators", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatAdministrators</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getChatMembersCount($chatID)
+    {
+        $args = array(
+            'chat_id' => $chatID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/getChatMembersCount", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatMembersCount</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getChatMember($chatID, $userID)
+    {
+        $args = array(
+            'chat_id' => $chatID,
+            'user_id' => $userID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/getChatMember", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatMember</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getFile($fileID)
+    {
+        $args = array(
+            'file_id' => $fileID
+        );
+        $r    = new HttpRequest("post", "https://api.telegram.or/bot" . $this->API . "/getFile", $args);
+        $rr   = $r->getResponse();
+        $rrr  = json_decode($rr, true);
+        $risultato == $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getFile</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getUserProfilePhotos($userID, $offset = false, $limit = false)
+    {
+        $data = array(
+            'user_id' => $fileID
+        );
+        if ($offset)
+            $data['offset'] = $offset;
+        if ($limit)
+            $data['limit'] = $limit;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/getUserProfilePhotos", $data);
+        $richiesta = $r->getResponse();
+        $rr        = json_decode($richiesta, true);
+        $risultato = $rr['ok'];
+        if ($risultato == false) {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getUserProfilePhotos</i></center>";
+            return $richiesta;
+        } else {
+            return $richiesta;
         }
     }
 }
