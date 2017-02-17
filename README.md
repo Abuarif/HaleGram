@@ -62,3 +62,6 @@ getChatMember
 ```
 
 and other in updates..! Listen to [@HaleGram](https://telegram.me/HaleGram)
+
+##Thanks to
+I would like to thank [@DanoGentili](https://telegram.me/DanoGentili), the PWRTelegram & MadelineProto's creator, [@BruninoIt](https://telegram.me/BruninoIt) and every my supporters that believe in me! Thank you guys <3
