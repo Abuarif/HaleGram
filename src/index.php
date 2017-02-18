@@ -78,7 +78,7 @@ class Bot
         }
     }
     
-    public function sendMessage($chatID, $text, $rmf = false, $pm = 'HTML', $dis = false, $replyto = false, $inline = 'pred')
+    public function sendMessage($chatID, $text, $rmf = false, $pm = 'HTML', $dis = false, $replyto = false, $inline = false)
     {
         
         if ($rmf == "nascondi")
