@@ -726,7 +726,7 @@ class Bot
         }
     }
     
-    public function editMessageReplyMarkup($id, $chatID = false, $rm)
+    public function editMessageReplyMarkup($caption, $id, $chatID = false, $rm)
     {
         if ($id and $chatID) {
             if ($nmenu) {
@@ -783,6 +783,29 @@ class Bot
             return $rr;
         } else {
             echo "<br>\r\n<center><b>Error!</b> <i>Method: answerCallbackQuery</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function answerInlineQuery($text, $id, $switch = false, $switchpm = false, $cache = 5)
+    {
+        $args = array(
+            'inline_query_id' => $id,
+            'results' => $text,
+            'cache_time' => $cache
+        );
+        if ($switch and $switchpm) {
+            $args["switch_pm_text"]      = $switch;
+            $args["switch_pm_parameter"] = $switchpm;
+        }
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/answerInlineQuery", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: answerInlineQuery</i></center>";
             return $rr;
         }
     }
