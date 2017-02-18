@@ -5,7 +5,7 @@ description: PHP framework of bot telegram's api
 # HaleGram
 
 Created by [GynxLol](https://telegram.me/GynxLol), licensed under MIT.
-*HaleGram is the best framework to create a bot for Telegram!*
+*HaleGram is a framework to create a bot for Telegram!*
 
 This framework make use of another class:
 
