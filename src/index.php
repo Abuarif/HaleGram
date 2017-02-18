@@ -765,4 +765,25 @@ class Bot
             return $rr;
         }
     }
+    
+    public function answerCallbackQuery($text, $id, $alert = false, $cache = 0)
+    {
+        $args = array(
+            'callback_query_id' => $id,
+            'cache_time' => $cache,
+            'text' => $text
+        );
+        if ($alert)
+            $args["show_alert"] = true;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/answerCallbackQuery", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: answerCallbackQuery</i></center>";
+            return $rr;
+        }
+    }
 }
