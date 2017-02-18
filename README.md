@@ -36,6 +36,7 @@ $var2 = $var->Method
 
 You can check the methods on [Telegram's bot API](http://core.telegram.org/bots/api)
 For now there is these methods:
+
 ```
 getMe
 getUpdates
@@ -58,7 +59,11 @@ getChat
 getChatAdministrators
 getChatMembersCount
 getChatMember
-
+getUserProfilePhotos
+kickChatMember
+unbanChatMember
+leaveChat
+unbanChatMember
 ```
 
 and other in updates..! Listen to [@HaleGram](https://telegram.me/HaleGram)
