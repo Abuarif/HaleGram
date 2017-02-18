@@ -696,7 +696,7 @@ class Bot
             $args = array(
                 'chat_id' => $chatID,
                 'caption' => $caption,
-                'message_id' => $cbmid
+                'message_id' => $id
             );
             if ($nmenu)
                 $args["reply_markup"] = $rm;
@@ -709,7 +709,7 @@ class Bot
             }
             $args = array(
                 'caption' => $caption,
-                'inline_message_id' => $cbmid
+                'inline_message_id' => $id
             );
             if ($nmenu)
                 $args["reply_markup"] = $rm;
@@ -726,7 +726,7 @@ class Bot
         }
     }
     
-    public function editMessageReplyMarkup($caption, $id, $chatID = false, $rm)
+    public function editMessageReplyMarkup($id, $chatID = false, $rm)
     {
         if ($id and $chatID) {
             if ($nmenu) {
@@ -737,7 +737,7 @@ class Bot
             }
             $args = array(
                 'chat_id' => $chatID,
-                'message_id' => $cbmid
+                'message_id' => $id
             );
             if ($nmenu)
                 $args["reply_markup"] = $rm;
@@ -749,7 +749,7 @@ class Bot
                 $rm = json_encode($rm);
             }
             $args = array(
-                'inline_message_id' => $cbmid
+                'inline_message_id' => $id
             );
             if ($nmenu)
                 $args["reply_markup"] = $rm;
@@ -809,4 +809,102 @@ class Bot
             return $rr;
         }
     }
+    
+    public function sendGame($chatID, $text, $rmf = false, $dis = false, $replyto = false, $inline = false)
+    {
+        
+        if (!$inline) {
+            $rm = array(
+                'keyboard' => $rmf,
+                'resize_keyboard' => true
+            );
+        } else {
+            $rm = array(
+                'inline_keyboard' => $rmf
+            );
+        }
+        $rm = json_encode($rm);
+        
+        $args = array(
+            'chat_id' => $chatID,
+            'game_short_name' => $text,
+            'disable_notification' => $dis
+        );
+        if ($replyto)
+            $args['reply_to_message_id'] = $replyto;
+        if ($rmf)
+            $args['reply_markup'] = $rm;
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/sendGame", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendGame</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function setGameScore($score, $chatID = false, $userID, $id, $force = false, $dis = false)
+    {
+        
+        if ($id and $chatID) {
+            $args = array(
+                'user_id' => $userID,
+                'score' => $score,
+                'force' => $force,
+                'disable_edit_message' => $dis,
+                'chat_id' => $chatID,
+                'message_id' => $cbmid
+            );
+        } else {
+            $args = array(
+                'user_id' => $userID,
+                'score' => $score,
+                'force' => $force,
+                'disable_edit_message' => $dis,
+                'inline_message_id' => $cbmid
+            );
+        }
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/setGameScore", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: setGameScore</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function getGameHighScores($userID, $id, $chatID = false, $rm)
+    {
+        if ($id and $chatID) {
+            $args = array(
+                'user_id' => $userID,
+                'chat_id' => $chatID,
+                'message_id' => $id
+            );
+            if ($nmenu)
+                $args["reply_markup"] = $rm;
+        } else {
+            $args = array(
+                'user_id' => $userID,
+                'inline_message_id' => $id
+            );
+        }
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/getGameHighScores", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: getGameHighScores</i></center>";
+            return $rr;
+        }
+    }
+    
 }
