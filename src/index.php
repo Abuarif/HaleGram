@@ -726,7 +726,7 @@ class Bot
         }
     }
     
-    public function editMessageReplyMarkup($caption, $id, $chatID = false, $rm)
+    public function editMessageReplyMarkup($id, $chatID = false, $rm)
     {
         if ($id and $chatID) {
             if ($nmenu) {
