@@ -683,4 +683,86 @@ class Bot
             return $richiesta;
         }
     }
+    
+    public function editMessageCaption($caption, $id, $chatID = false, $rm = false)
+    {
+        if ($id and $chatID) {
+            if ($nmenu) {
+                $rm = array(
+                    'inline_keyboard' => $nmenu
+                );
+                $rm = json_encode($rm);
+            }
+            $args = array(
+                'chat_id' => $chatID,
+                'caption' => $caption,
+                'message_id' => $cbmid
+            );
+            if ($nmenu)
+                $args["reply_markup"] = $rm;
+        } else {
+            if ($nmenu) {
+                $rm = array(
+                    'inline_keyboard' => $nmenu
+                );
+                $rm = json_encode($rm);
+            }
+            $args = array(
+                'caption' => $caption,
+                'inline_message_id' => $cbmid
+            );
+            if ($nmenu)
+                $args["reply_markup"] = $rm;
+        }
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/editMessageCaption", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageCaption</i></center>";
+            return $rr;
+        }
+    }
+    
+    public function editMessageReplyMarkup($caption, $id, $chatID = false, $rm)
+    {
+        if ($id and $chatID) {
+            if ($nmenu) {
+                $rm = array(
+                    'inline_keyboard' => $nmenu
+                );
+                $rm = json_encode($rm);
+            }
+            $args = array(
+                'chat_id' => $chatID,
+                'message_id' => $cbmid
+            );
+            if ($nmenu)
+                $args["reply_markup"] = $rm;
+        } else {
+            if ($nmenu) {
+                $rm = array(
+                    'inline_keyboard' => $nmenu
+                );
+                $rm = json_encode($rm);
+            }
+            $args = array(
+                'inline_message_id' => $cbmid
+            );
+            if ($nmenu)
+                $args["reply_markup"] = $rm;
+        }
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/editMessageReplyMarkup", $args);
+        $rr        = $r->getResponse();
+        $rrr       = json_decode($rr, true);
+        $risultato = $rrr['ok'];
+        if ($risultato == true) {
+            return $rr;
+        } else {
+            echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageReplyMarkup</i></center>";
+            return $rr;
+        }
+    }
 }
