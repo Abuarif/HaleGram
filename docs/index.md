@@ -39,37 +39,9 @@ $var2 = $var->Method
 ```
 
 You can check the methods on [Telegram's bot API](http://core.telegram.org/bots/api)
-For now there is these methods:
 
 ```
-getMe
-getUpdates
-getWebhookInfo
-sendMessage
-sendChatAction (is typing...)
-sendPhoto
-sendVideo
-editMessageText
-forwardMessage
-sendAudio
-sendVoice
-sendDocument
-sendSticker
-sendLocation
-sendContact
-sendVenue
-getFile
-getChat
-getChatAdministrators
-getChatMembersCount
-getChatMember
-getUserProfilePhotos
-kickChatMember
-unbanChatMember
-leaveChat
-unbanChatMember
-editMessageCaption
-editMessageReplyMarkup
+It supports all methods!
 ```
 
 and other in updates..! Listen to [@HaleGram](https://telegram.me/HaleGram)
