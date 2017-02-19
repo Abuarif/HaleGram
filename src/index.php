@@ -56,6 +56,38 @@ class Bot
         }
     }
     
+    public function setWebhook($url)
+    {
+        $version   = phpversion();
+        $args      = array(
+            'url' => $url
+        );
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/setWebhook", $args);
+        $richiesta = $r->getResponse();
+        $rr        = json_decode($richiesta, true);
+        $risultato = $rr['ok'];
+        if ($risultato == false) {
+            echo "<br><center>\r\n<b>Error!</b> <i>Method: setWebhook</i></center>";
+            return $richiesta;
+        } else {
+            return $richiesta;
+        }
+    }
+    
+    public function deleteWebhook()
+    {
+        $r         = new HttpRequest("post", "https://api.telegram.org/bot" . $this->API . "/deleteWebhook");
+        $richiesta = $r->getResponse();
+        $rr        = json_decode($richiesta, true);
+        $risultato = $rr['ok'];
+        if ($risultato == false) {
+            echo "<br><center>\r\n<b>Error!</b> <i>Method: deleteWebhook</i></center>";
+            return $richiesta;
+        } else {
+            return $richiesta;
+        }
+    }
+    
     public function getUpdates($offset = false, $limit = false, $timeout = false, $allowed = false)
     {
         if ($offset)
