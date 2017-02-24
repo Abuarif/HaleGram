@@ -23,7 +23,11 @@ class Bot
             $this->API = $api;
             echo "<br><center>\r\n<b>Initializing a new session..</b></center>";
         } else {
-            echo "<br><center>\r\n<b>Error!</b> API Key is empty!</center>";
+            $error = "<br><center>\r\n<b>Error!</b> API Key is empty!</center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . "\n\n");
+            fclose($f2);
             #exit;
         }
     }
@@ -35,7 +39,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br><center>\r\n<b>Error!</b> <i>Method: getMe</i></center>";
+            $error = "<br><center>\r\n<b>Error!</b> <i>Method: getMe</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $richiesta . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -49,7 +57,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br><center>\r\n<b>Error!</b> <i>Method: getWebhookInfo</i></center>";
+            $error = "<br><center>\r\n<b>Error!</b> <i>Method: getWebhookInfo</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $richiesta . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -67,7 +79,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br><center>\r\n<b>Error!</b> <i>Method: setWebhook</i></center>";
+            $error = "<br><center>\r\n<b>Error!</b> <i>Method: setWebhook</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $richiesta . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -81,7 +97,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br><center>\r\n<b>Error!</b> <i>Method: deleteWebhook</i></center>";
+            $error = "<br><center>\r\n<b>Error!</b> <i>Method: deleteWebhook</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $richiesta . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -103,7 +123,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getUpdates</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getUpdates</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $richiesta . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -153,7 +177,11 @@ class Bot
             if ($risultato == true) {
                 return $rr;
             } else {
-                echo "<br>\r\n<center><b>Error!</b> <i>Method: sendMessage</i></center>";
+                $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendMessage</i></center>";
+                $error = strip_tags($error);
+                $f2    = fopen("error.log", 'a');
+                fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+                fclose($f2);
                 return $rr;
             }
         }
@@ -182,11 +210,19 @@ class Bot
             if ($risultato == true) {
                 return $rr;
             } else {
-                echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageText</i></center>";
+                $error = "<br>\r\n<center><b>Error!</b> <i>Method: editMessageText</i></center>";
+                $error = strip_tags($error);
+                $f2    = fopen("error.log", 'a');
+                fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+                fclose($f2);
                 return $rr;
             }
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageText</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: editMessageText</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, $error . "\n\n");
+            fclose($f2);
         }
     }
     public function forwardMessage($chatID, $fromchat, $msgid, $dis = false)
@@ -204,7 +240,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: forwardMessage</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: forwardMessage</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -221,7 +261,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendChatAction</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendChatAction</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -257,7 +301,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendPhoto</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendPhoto</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -293,7 +341,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendSticker</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendSticker</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -329,7 +381,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVideo</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendVideo</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -365,7 +421,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendAudio</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendAudio</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -401,7 +461,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendDocument</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendDocument</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -437,7 +501,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVoice</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendVoice</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -474,7 +542,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendLocation</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendLocation</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -513,7 +585,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendVenue</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendVenue</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -551,7 +627,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendContact</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendContact</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -569,7 +649,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: kickChatMember</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: kickChatMember</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -587,7 +671,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: unbanChatMember</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: unbanChatMember</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -604,7 +692,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: leaveChat</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: leaveChat</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -621,7 +713,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChat</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getChat</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -638,7 +734,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatAdministrators</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getChatAdministrators</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -655,7 +755,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatMembersCount</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getChatMembersCount</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -673,7 +777,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getChatMember</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getChatMember</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -690,7 +798,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getFile</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getFile</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -709,7 +821,11 @@ class Bot
         $rr        = json_decode($richiesta, true);
         $risultato = $rr['ok'];
         if ($risultato == false) {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getUserProfilePhotos</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getUserProfilePhotos</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $richiesta;
         } else {
             return $richiesta;
@@ -753,7 +869,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageCaption</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: editMessageCaption</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -793,7 +913,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: editMessageReplyMarkup</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: editMessageReplyMarkup</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -814,7 +938,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: answerCallbackQuery</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: answerCallbackQuery</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -837,7 +965,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: answerInlineQuery</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: answerInlineQuery</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -873,7 +1005,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: sendGame</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: sendGame</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -906,7 +1042,11 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: setGameScore</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: setGameScore</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
@@ -934,9 +1074,12 @@ class Bot
         if ($risultato == true) {
             return $rr;
         } else {
-            echo "<br>\r\n<center><b>Error!</b> <i>Method: getGameHighScores</i></center>";
+            $error = "<br>\r\n<center><b>Error!</b> <i>Method: getGameHighScores</i></center>";
+            $error = strip_tags($error);
+            $f2    = fopen("error.log", 'a');
+            fwrite($f2, date("m.d.y") . " " . $error . " " . $rr . "\n\n");
+            fclose($f2);
             return $rr;
         }
     }
-    
 }
