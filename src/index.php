@@ -1082,4 +1082,69 @@ class Bot
             return $rr;
         }
     }
+    
+    public function parseMessage($type = "message", $markup = "HTML")
+    {
+        global $content;
+        global $update;
+        if (!empty($type)) {
+            $msg       = $update[$type]['text'];
+            $entities  = $update[$type]['entities'];
+            $lengthmsg = strlen($msg);
+            $msgi      = $msg;
+            $s         = str_split($msgi);
+            $i         = false;
+            foreach ($entities as $format) {
+                $typeformat = $format['type'];
+                $offset     = $format['offset'];
+                $length     = $format['length'];
+                if ($typeformat == "code") {
+                    if ($markup == "HTML") {
+                        $s[$offset]           = substr_replace($s[$offset], '<code>', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '</code>' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    } else {
+                        $s[$offset]           = substr_replace($s[$offset], '`', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '`' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    }
+                } elseif ($typeformat == "bold") {
+                    if ($markup == "HTML") {
+                        $s[$offset]           = substr_replace($s[$offset], '<b>', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '</b>' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    } else {
+                        $s[$offset]           = substr_replace($s[$offset], '*', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '*' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    }
+                } elseif ($typeformat == "italic") {
+                    if ($markup == "HTML") {
+                        $s[$offset]           = substr_replace($s[$offset], '<i>', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '</i>' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    } else {
+                        $s[$offset]           = substr_replace($s[$offset], '_', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '_' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    }
+                } elseif ($typeformat == "pre") {
+                    if ($markup == "HTML") {
+                        $s[$offset]           = substr_replace($s[$offset], '<pre>', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '</pre>' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    } else {
+                        $s[$offset]           = substr_replace($s[$offset], '```', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '```' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    }
+                } elseif ($typeformat == "text_link") {
+                    $url = $format['url'];
+                    if ($markup == "HTML") {
+                        $s[$offset]           = substr_replace($s[$offset], '<a href="' . $url . '">', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '</a>' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    } else {
+                        $s[$offset]           = substr_replace($s[$offset], '[', strlen($s[$offset]) - 1, 0);
+                        $s[$offset + $length] = '](' . $url . ')' . (isset($s[$offset + $length]) ? $s[$offset + $length] : '');
+                    }
+                }
+            }
+            $msgi = implode('', $s);
+            return $msgi;
+        } else {
+            return false;
+        }
+    }
 }
